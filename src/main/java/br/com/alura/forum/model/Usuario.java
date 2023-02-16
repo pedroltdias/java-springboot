@@ -1,5 +1,6 @@
 package br.com.alura.forum.model;
 
+@Entity
 public class Usuario {
 
 	private Long id;
