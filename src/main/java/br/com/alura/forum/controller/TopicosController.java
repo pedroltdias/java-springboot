@@ -1,22 +1,25 @@
 package br.com.alura.forum.controller;
 
 import br.com.alura.forum.controller.dto.TopicoDTO;
+import br.com.alura.forum.controller.dto.TopicoFormDTO;
 import br.com.alura.forum.model.Topico;
+import br.com.alura.forum.repository.CursoRepository;
 import br.com.alura.forum.repository.TopicoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/topicos")
 public class TopicosController {
 
     @Autowired
     private TopicoRepository topicoRepository;
+    @Autowired
+    private CursoRepository cursoRepository;
 
-    @RequestMapping("/topicos")
+    @GetMapping
     @ResponseBody
     public List<TopicoDTO> lista(String nomeCurso){
         if(nomeCurso == null){
@@ -27,5 +30,11 @@ public class TopicosController {
             return TopicoDTO.converter(topicos);
         }
 
+    }
+
+    @PostMapping
+    public void cadastrar(@RequestBody TopicoFormDTO form) {
+        Topico topico = form.converter(cursoRepository);
+        topicoRepository.save(topico);
     }
 }
