@@ -1,4 +1,4 @@
-package br.com.alura.forum.controller.dto;
+package br.com.alura.forum.controller.form;
 
 import br.com.alura.forum.model.Curso;
 import br.com.alura.forum.model.Topico;
